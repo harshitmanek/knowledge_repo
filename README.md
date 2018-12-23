@@ -12,9 +12,11 @@ Now the data looked somewhat like this:
 
 Next the code goes like this:
 
+'''python
 import pandas as pd
 -- read the csv, by giving the path
 df = pd.read_csv("/Users/harshitmanek/Documents/beaver/dataset_small.csv")
+'''
 
 Next we need to standardize the data,
 PCA is effected by scale so we need to scale the features in our data before applying PCA. For this we have used StandardScaler.

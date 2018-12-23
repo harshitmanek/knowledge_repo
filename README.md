@@ -13,20 +13,20 @@ Now the data looked somewhat like this:
 Next the code goes like this:
 
 import pandas as pd
-# read the csv, by giving the path
+-- read the csv, by giving the path
 df = pd.read_csv("/Users/harshitmanek/Documents/beaver/dataset_small.csv")
 
 Next we need to standardize the data,
 PCA is effected by scale so we need to scale the features in our data before applying PCA. For this we have used StandardScaler.
 
 from sklearn.preprocessing import StandardScaler
-#list of all genes
+--list of all genes
 features = ['A1BG', 'A1CF', 'A2BP1', 'A2LD1',..............]
-# Separating out the features
+-- Separating out the features
 x = df.loc[:, features].values
-# Separating out the target, this is the label that classifies whether the patient has adenocarcinoma tumor or neuroendocrine tumor. this is basically the histology_type
+-- Separating out the target, this is the label that classifies whether the patient has adenocarcinoma tumor or neuroendocrine tumor. this is basically the histology_type
 y = df.loc[:,['target']].values
-# Standardizing the features
+-- Standardizing the features
 x = StandardScaler().fit_transform(x)
 
 
@@ -95,5 +95,24 @@ for target, color in zip(targets,colors):
 ax.legend(targets)
 ax.grid()
 
-![Screenshot](screenshot12.png)
+![Screenshot](screenshot2.png)
+
+-- Now to analyze the above, what we have done is we have reduced the dimension of approximately 18,000 genes per patient to 2 components. Which is not at all the optimized way to handle problems, we can increase the principal components to see where the in the graph the clusters begin to separate.
+
+According to the above carried out analysis we can say that the neuroendocrine tumors are not clearly separable from the adenocarcinoma tumors when we reduce the dimension of our multi-variate dataset to just 2 principal components.
+
+Variance in PCA:
+
+The explained variance tells us how much information (variance) can be attributed to each of the principal components. This is important as while we can convert 18,000 dimensional space to 2 dimensional space, we lose some of the variance (information) when we do this.
+
+Variance of the PCA can be calculated as :
+
+pca.explained_variance_ratio_
+array([0.14416271, 0.10705592])
+
+This concludes, together, the first two principal components contain 25.11% of the information. The first principal component contains 14.41% of the variance and the second principal component contains 10.70% of the variance. The other principal component contained the rest of the variance of the dataset.
+
+We should try and bring the sum of the two variance to be 100%, this will reduce our error margins.
+
+
 

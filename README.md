@@ -13,7 +13,7 @@ Now the data looked somewhat like this:
 Next the code goes like this:
 ```python
 import pandas as pd
--- read the csv, by giving the path
+#read the csv, by giving the path
 df = pd.read_csv("/Users/harshitmanek/Documents/beaver/dataset_small.csv")
 ```
 Next we need to standardize the data,
@@ -21,13 +21,13 @@ PCA is effected by scale so we need to scale the features in our data before app
 
 ```python
 from sklearn.preprocessing import StandardScaler
---list of all genes
+#list of all genes
 features = ['A1BG', 'A1CF', 'A2BP1', 'A2LD1',..............]
--- Separating out the features
+#Separating out the features
 x = df.loc[:, features].values
--- Separating out the target, this is the label that classifies whether the patient has adenocarcinoma tumor or neuroendocrine tumor. this is basically the histology_type
+#Separating out the target, this is the label that classifies whether the patient has adenocarcinoma tumor or neuroendocrine tumor. this is basically the histology_type
 y = df.loc[:,['target']].values
--- Standardizing the features
+#Standardizing the features
 x = StandardScaler().fit_transform(x)
 ```
 
